@@ -1,0 +1,73 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity cache_memory is
+    port(reset_n,clk,read,write: in STD_LOGIC;
+         addr : in STD_LOGIC_VECTOR(9 downto 0);
+         writedata: in STD_LOGIC_VECTOR(15 downto 0);
+         readdata: out STD_LOGIC_VECTOR(15 downto 0);
+         hit: out STD_LOGIC
+     );
+end cache_memory;
+
+architecture bhv of cache_memory is
+    component cache is
+        port(clk, wren, reset_n :in STD_LOGIC;
+             full_address :in STD_LOGIC_VECTOR(9 downto 0);
+             wrdata :in STD_LOGIC_VECTOR(15 downto 0);
+             invalidate :in STD_LOGIC;
+             data: out STD_LOGIC_VECTOR(15 downto 0);
+             hit: out STD_LOGIC;
+             cache_ready: out STD_LOGIC := '1'
+         );
+    end component;
+
+    component memory is
+        port(clock:in STD_LOGIC;
+             wr:in STD_LOGIC;
+             -- Address size is equal to index + tag
+             address:in STD_LOGIC_VECTOR(9 downto 0); --cpu full address
+             input_data:in STD_LOGIC_VECTOR(15 downto 0);
+             output_data:out STD_LOGIC_VECTOR(15 downto 0);
+            ready:out STD_LOGIC := '0'
+         );
+    end component;
+
+    component cache_controller is
+        port(write : in STD_LOGIC;
+             read : in STD_LOGIC;
+             hit : in STD_LOGIC;
+             clk : in STD_LOGIC;
+             cache_ready: in STD_LOGIC := '0';
+             memory_ready : in STD_LOGIC := '0';
+             wr_cache: out STD_LOGIC := '0';
+             wr_ram: out STD_LOGIC := '0';
+             invalidate : out STD_LOGIC := '0'
+            
+         );
+    end component;
+
+    signal wr_cache : STD_LOGIC;
+    signal wr_memory : STD_LOGIC;
+    signal invalidate : STD_LOGIC;
+    signal wren : STD_LOGIC := '0';
+    signal hit_out : STD_LOGIC;
+    signal cache_ready : STD_LOGIC := '1';
+    signal memory_out : STD_LOGIC_VECTOR( 15 downto 0);
+    signal memory_ready : STD_LOGIC;
+    signal cache_out : STD_LOGIC_VECTOR (15 downto 0);
+    signal which : STD_LOGIC;
+
+begin
+    cache_instance : cache port map(clk, wr_cache, reset_n, addr, memory_out,invalidate,cache_out,hit_out,cache_ready);
+    memory_instance : memory port map(clk, wr_memory, addr, writedata, memory_out, memory_ready);
+    controler_instance: cache_controller port map(write, read, hit_out, clk, cache_ready, memory_ready, wr_cache,wr_memory,invalidate);
+
+    which <= read;
+    hit <= hit_out;
+    readdata <= memory_out when write = '1' else
+              cache_out when read = '1' else
+              cache_out;
+
+end bhv;

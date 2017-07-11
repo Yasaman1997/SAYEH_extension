@@ -1,0 +1,22 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity multiplexer_16 is
+    port(set_0:in STD_LOGIC_VECTOR(15 downto 0);
+         set_1:in STD_LOGIC_VECTOR(15 downto 0);
+         selection:in STD_LOGIC;
+         output: out STD_LOGIC_VECTOR(15 downto 0)
+     );
+end multiplexer_16;
+
+architecture behavioral of multiplexer_16 is
+begin
+   
+   with selection select
+     output <= set_0 when '0',
+          set_1 when '1',
+               "XXXXXXXXXXXXXXXX" when others;
+
+end behavioral;
+

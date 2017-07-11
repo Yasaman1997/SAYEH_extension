@@ -1,0 +1,258 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity cache is
+    port(clock:in STD_LOGIC;
+         reset :in STD_LOGIC;
+         write_enable:in STD_LOGIC;
+         invalidate :in STD_LOGIC;
+         Cpu_full_address :in STD_LOGIC_VECTOR(9 downto 0);
+         write_data :in STD_LOGIC_VECTOR(15 downto 0);
+         read_data: out STD_LOGIC_VECTOR(15 downto 0);
+         
+         is_ready: out STD_LOGIC := '1';
+         success: out STD_LOGIC
+     );
+end cache;
+
+
+
+
+architecture desc of cache is
+  
+  
+  
+    component  multiplexer_16 is
+    port(
+         set_0:in STD_LOGIC_VECTOR(15 downto 0);
+         set_1:in STD_LOGIC_VECTOR(15 downto 0);
+         selection:in STD_LOGIC;
+         output: out STD_LOGIC_VECTOR(15 downto 0)
+     );
+    end component;
+    
+    
+    component Data_Array is
+      port(	clk :in std_logic;
+	          address:	in std_logic_vector(5 downto 0);    --index
+	          wren:	in std_logic;
+	          wrdata:	in std_logic_vector(15 downto 0);
+	          data:	out std_logic_vector(15 downto 0)
+	          --------
+	          -- input_Tag : in std_logic_vector(3 downto 0)  
+	   
+	 );
+    end component;
+
+    component tag_valid_array is
+        port(	clk :in std_logic;
+      reset_n:in std_logic;
+	    address:	in std_logic_vector(5 downto 0); --input index as address
+	    wren:	in std_logic;
+	    inValidate:	in std_logic;  --a bit for finding out if it is valid or not
+	    wrdata:	in std_logic_vector(3 downto 0); --4_bit input Tag
+	    output:	out std_logic_vector(4 downto 0)
+
+         );
+    end component;
+
+   
+
+    component miss_hit_logic is
+        port( tag:	in std_logic_vector(3 downto 0);
+	    w0:	in std_logic_vector(4 downto 0);  --write0 =  tag 0 + valid 0 
+	    w1:	in std_logic_vector(4 downto 0);  --write1 = tag 1  +  valid 1 
+	    hit:	out std_logic;
+	    w0_valid:	out std_logic;
+	    w1_valid:	out std_logic
+         );
+    end component;
+
+
+ component Mru is
+        port(clock : in STD_LOGIC;
+          address : in STD_LOGIC_VECTOR(5 downto 0);
+          x : in STD_LOGIC;
+          enable : in STD_LOGIC;
+          reset : in STD_LOGIC;
+          set_0_valid : out STD_LOGIC;
+          set_1_valid:  out STD_LOGIC
+         );
+    end component;
+
+
+
+
+--signals we need--
+    signal w0_valid : STD_LOGIC;
+    signal w1_valid : STD_LOGIC;
+    
+    signal w0_Correct_policy : STD_LOGIC;
+    signal w1_Correct_policy : STD_LOGIC;
+    
+    signal enable : STD_LOGIC := '1';
+    signal a_signal: STD_LOGIC := '0';
+    
+    signal successful_read : STD_LOGIC;
+  
+    
+  
+    
+    type array_of_data is array (63 downto 0) of STD_LOGIC_VECTOR (15 downto 0);
+    
+    signal S0_data : STD_LOGIC_VECTOR(15 downto 0);
+    signal S1_data : STD_LOGIC_VECTOR(15 downto 0);
+    
+    signal S0_wren : STD_LOGIC := '0';
+    signal S1_wren : STD_LOGIC := '0';
+    
+    
+    signal S0_tag_valid : STD_LOGIC_VECTOR(4 downto 0); --tag+valid--
+    signal S1_tag_valid : STD_LOGIC_VECTOR(4 downto 0);
+    
+   
+    
+  
+begin
+  
+    --Data_arrays / instantiation of the sets--
+    W0_data_array: Data_Array port map(clk => clock ,
+                                       wren => S0_wren, 
+                                       address =>  Cpu_full_address(5 downto 0), 
+                                       wrdata => write_data, 
+                                       data => S0_data);
+                                       
+    W1_data_array: Data_Array port map(clk => clock , 
+                                       wren => S1_wren, 
+                                       address => Cpu_full_address(5 downto 0), 
+                                       wrdata => write_data,
+                                       data => S1_data);
+
+    --Tag_valid_Arrays--
+    W0_tag_valid: tag_valid_array port map(clk => clock, 
+                                           wren => S0_wren,
+                                           reset_n => reset,
+                                           invalidate => invalidate,
+                                           address => Cpu_full_address(5 downto 0), 
+                                           wrdata => Cpu_full_address(9 downto 6),
+                                           output => S0_tag_valid);
+
+    W1_tag_valid: tag_valid_array port map(clk => clock, 
+                                           wren => S1_wren, 
+                                           reset_n => reset,
+                                           invalidate => invalidate,
+                                           address => Cpu_full_address(5 downto 0),
+                                           wrdata => Cpu_full_address(9 downto 6),
+                                           output => S1_tag_valid);
+
+    --Miss_hit--
+    miss_hit: miss_hit_logic port map(tag => Cpu_full_address(9 downto 6),
+                                      w0 => S0_tag_valid,
+                                      w1 => S1_tag_valid,
+                                      hit => successful_read ,
+                                      w0_valid => w0_valid,
+                                      w1_valid => w1_valid);
+
+   
+    --Replacement Policy --
+    Mru_logic: Mru port map( clock => clock,
+                             reset=> invalidate,
+                             address => Cpu_full_address(5 downto 0),
+                             x => a_signal,
+                             enable => enable,
+                            
+                             set_0_valid => w0_Correct_policy,
+                             set_1_valid => w1_Correct_policy
+                           );
+
+   --Multiplexer --
+    mux  :  multiplexer_16 port map(set_0 => S0_data ,
+                                    set_1 => S1_data,
+                                    selection => a_signal,
+                                    output => read_data
+                                  );
+                                    
+ 
+
+ success <= successful_read ;
+
+    process(clock)
+      
+       
+        constant begin_to_read : integer := 2;
+        constant begin_to_write : integer := 1;
+        constant beginning : integer := 0;
+        variable check : integer := 0;
+      
+        variable Current_State : integer := 0;
+        variable address_to_be_written: STD_LOGIC_VECTOR(9 downto 0);
+        variable Most_address : STD_LOGIC_VECTOR(9 downto 0);
+        variable Most_written_bit: STD_LOGIC;
+        variable Most_written_data : STD_LOGIC_VECTOR(15 downto 0);
+    begin
+   
+   --beginning
+        if(Current_State = beginning) then
+            if( Most_written_bit /= write_enable  or  write_data /= Most_written_data or most_address /= Cpu_full_address) then
+                if(write_enable = '1') then
+                --writing begins 
+                    enable <= '0';
+                    Current_State := begin_to_write;
+                    is_ready <= '0';
+                    
+                    S0_wren <= '0';
+                    S1_wren <= '0';
+                  
+                    
+                    address_to_be_written := Cpu_full_address;
+                else
+                  -- begin again !
+                     if(check = 1) then
+                        S0_wren <= '0';
+                      end if ;
+                      
+                    Current_State := beginning;
+                    S1_wren <= '0';
+                    a_signal <= w1_valid;
+                 
+                    
+
+                end if;
+            else
+                a_signal <= w1_valid;
+                
+                S0_wren <= '0';
+                S1_wren <= '0';
+                enable <= '0';
+            end if;
+            --writing 
+        elsif(Current_State = begin_to_write) then
+             if(cpu_full_address = address_to_be_written ) then
+             --begin again 
+               Current_State:= beginning;
+               
+                S0_wren <= (not successful_read and w0_Correct_policy and write_enable) or ( w0_valid and write_enable and successful_read );
+                S1_wren <= (not successful_read and successful_read and w1_valid and write_enable)  or (not w0_Correct_policy and write_enable );
+                a_signal<= (not successful_read and w0_Correct_policy and write_enable) or (successful_read  and write_enable and w0_valid);
+               
+               
+                is_ready <= '1';
+                enable <= '1';
+                check := 1;
+            else
+              
+                Current_State := beginning;
+                check := 1;
+            end if;
+        end if;
+        
+        most_written_bit:= write_enable;
+        Most_written_data:= write_data;
+        most_address := Cpu_full_address;
+        
+      
+    end process;
+    
+end desc;
+

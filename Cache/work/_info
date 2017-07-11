@@ -1,0 +1,446 @@
+m255
+K3
+13
+cModel Technology
+dD:\modeltech64_10.1c\examples
+Ecache
+Z0 w1499716197
+Z1 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 dD:\A\e, sources\Architecture\hw\Final_project\Cache
+Z5 8D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache.vhd
+Z6 FD:/A/e, sources/Architecture/hw/Final_project/Cache/Cache.vhd
+l0
+L5
+V`dIZjHE]bTU;Z87<S4jme3
+Z7 OL;C;10.1c;51
+32
+Z8 !s108 1499756177.116000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache.vhd|
+Z10 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache.vhd|
+Z11 o-work work -2002 -explicit
+Z12 tExplicit 1
+!s100 MIei5J]HN4Y:N`[M:iKFf1
+!i10b 1
+Adesc
+R1
+R2
+R3
+DEx4 work 5 cache 0 22 `dIZjHE]bTU;Z87<S4jme3
+32
+l117
+L22
+V;0aBJXTAfj09XIGE9nOzA1
+R7
+R8
+R9
+R10
+R11
+R12
+!s100 FbF=M[T0;z65hn1G]n1U92
+!i10b 1
+Agate_desc
+R1
+R2
+R3
+DEx4 work 5 cache 0 22 6@b9d5=6[5O9Rk89n9ea@3
+l89
+L18
+VZ^>KjAOQMlSVBGm17o5Z21
+R7
+32
+R9
+R10
+R11
+R12
+w1499683043
+!s108 1499683052.831000
+!s100 <9POUWQA0JPjoZBE;If782
+!i10b 1
+Agate_level
+R1
+R2
+R3
+Z13 DEx4 work 5 cache 0 22 YRMmejC4j_a@f:d:D^Pc90
+l84
+L16
+VkNMRU5kFF[ahDFad5]lmH2
+R7
+32
+R9
+R10
+R11
+R12
+w1499681616
+!s100 lh81g]FO2L0^1fzGbeJGE1
+!s108 1499681620.209000
+!i10b 1
+Adescr
+R1
+R2
+R3
+R13
+l84
+L16
+VS`eMKUm2[`W<2@]IZzfz_2
+R7
+32
+R9
+R10
+R11
+R12
+w1499666937
+!s108 1499581312.403000
+!s100 4;akZj5:@l4V1D2XKP14R0
+!i10b 1
+Ecache_controller
+Z14 w1499754626
+R1
+R2
+R3
+R4
+Z15 8D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Controller.vhd
+Z16 FD:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Controller.vhd
+l0
+L5
+V<0<AigQ46WhKH=>lG?>l80
+R7
+32
+Z17 !s108 1499756175.667000
+Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Controller.vhd|
+Z19 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Controller.vhd|
+R11
+R12
+!s100 i?[WL`lg2QB[m=ZQoc8ZF2
+!i10b 1
+Abhv
+R1
+R2
+R3
+DEx4 work 16 cache_controller 0 22 <0<AigQ46WhKH=>lG?>l80
+32
+l31
+L22
+VnN=]PTR9LkBhEek5R_F:F1
+R7
+R17
+R18
+R19
+R11
+R12
+!s100 Mg:D`621RTdbBbhl7O_=[3
+!i10b 1
+Abehavorial
+R1
+R2
+R3
+DEx4 work 16 cache_controller 0 22 l[Y?dRzeH:S27Xo7NeIUB1
+l22
+L18
+V7aC9RaXbWb7L<854_3d?20
+R7
+32
+R18
+R11
+R12
+w1499110638
+R19
+!s108 1499580902.460000
+!s100 RWQ@T>1[F^<_]a<HmJ4BH0
+!i10b 1
+Ecache_memory
+Z20 w1499716486
+R1
+R2
+R3
+R4
+Z21 8D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Memory.vhd
+Z22 FD:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Memory.vhd
+l0
+L5
+VXXMkI2CK=J=m;]eHE5c6@0
+R7
+32
+Z23 !s108 1499756177.802000
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Memory.vhd|
+Z25 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Memory.vhd|
+R11
+R12
+!s100 757I7m:HG8SnPklYc<YTj2
+!i10b 1
+Adescr
+R1
+R2
+R3
+DEx4 work 12 cache_memory 0 22 XXMkI2CK=J=m;]eHE5c6@0
+32
+l83
+L17
+V:Hh`k`IRe3cegHibINnkU2
+R7
+R23
+R24
+R25
+R11
+R12
+!s100 W;LM;J9QDI4^6:Nd8l4:O1
+!i10b 1
+Adataflow
+R1
+R2
+R3
+DEx4 work 12 cache_memory 0 22 ][V4_?lT3]J??:6TBf>Z13
+l60
+L14
+VQEIMf`QnR83lNT`AN[Jcm2
+R7
+32
+R24
+R11
+R12
+w1499364080
+R25
+!s108 1499580775.021000
+!s100 8N@lkm]9T5za1]NNn5Sac0
+!i10b 1
+Edata_array
+Z26 w1499581592
+R1
+R2
+R3
+R4
+Z27 8D:/A/e, sources/Architecture/hw/Final_project/Cache/Data_Array.vhd
+Z28 FD:/A/e, sources/Architecture/hw/Final_project/Cache/Data_Array.vhd
+l0
+L6
+VeDfaae5M>0_k`z0@27A_Y0
+R7
+32
+Z29 !s108 1499756176.023000
+Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/Data_Array.vhd|
+Z31 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/Data_Array.vhd|
+R11
+R12
+!s100 L1KXnNi_aa>okdcV94=8g0
+!i10b 1
+Abhv
+R1
+R2
+R3
+DEx4 work 10 data_array 0 22 eDfaae5M>0_k`z0@27A_Y0
+32
+l41
+L22
+V9X]nORg?n8nJEzeD<FB4>3
+R7
+R29
+R30
+R31
+R11
+R12
+!s100 Eb=3g5]Y87F]h5TD8EU]l3
+!i10b 1
+Ememory
+Z32 w1499706802
+R1
+R2
+R3
+R4
+Z33 8D:/A/e, sources/Architecture/hw/Final_project/Cache/memory.vhd
+Z34 FD:/A/e, sources/Architecture/hw/Final_project/Cache/memory.vhd
+l0
+L9
+V?1zm@62iEd?eRfkPf7UJg2
+R7
+32
+Z35 !s108 1499756178.204000
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/memory.vhd|
+Z37 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/memory.vhd|
+R11
+R12
+!s100 6m<=;BAJ5`E1G@Jg2^X8A2
+!i10b 1
+Abhv
+R1
+R2
+R3
+DEx4 work 6 memory 0 22 ?1zm@62iEd?eRfkPf7UJg2
+32
+l23
+L20
+VQjf@8nDglS>0fJ[JATWb?1
+R7
+R35
+R36
+R37
+R11
+R12
+!s100 VC03ikQ[4[<6k>8gOFaiG2
+!i10b 1
+Emiss_hit_logic
+Z38 w1499576456
+R1
+R2
+R3
+R4
+Z39 8D:/A/e, sources/Architecture/hw/Final_project/Cache/Miss_Hit_Logic.vhd
+Z40 FD:/A/e, sources/Architecture/hw/Final_project/Cache/Miss_Hit_Logic.vhd
+l0
+L6
+Vk3=EOEW3c1WH@]8mc^D8P2
+R7
+32
+Z41 !s108 1499756176.395000
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/Miss_Hit_Logic.vhd|
+Z43 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/Miss_Hit_Logic.vhd|
+R11
+R12
+!s100 <DKo7d2>C??3DXmzZR;:n3
+!i10b 1
+Adescription
+R1
+R2
+R3
+Z44 DEx4 work 14 miss_hit_logic 0 22 k3=EOEW3c1WH@]8mc^D8P2
+32
+l31
+L21
+VGa3T0>L:POK0V`SLU<j?N1
+R7
+R41
+R42
+R43
+R11
+R12
+!s100 TUGHToHjm]<BoHQcoHYni2
+!i10b 1
+Agate_description
+R1
+R2
+R3
+R44
+l30
+L21
+V@Bzm6T`lehUKSN?O92cSD1
+R7
+32
+R42
+R11
+R12
+w1499364280
+R43
+!s108 1499364280.545000
+!s100 SCc1Y5m]QaCoa]FmaDUWV0
+!i10b 1
+Emru
+Z45 w1499706220
+R1
+R2
+R3
+R4
+Z46 8D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Replacement_Policy.vhd
+Z47 FD:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Replacement_Policy.vhd
+l0
+L6
+VdR6A]@mI>Jhkl_TN7LWSn0
+R7
+32
+Z48 !s108 1499756175.306000
+Z49 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Replacement_Policy.vhd|
+Z50 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/Cache_Replacement_Policy.vhd|
+R11
+R12
+!s100 @[dRXP:A1SS`MhHXfDL0C3
+!i10b 1
+Abhv
+R1
+R2
+R3
+DEx4 work 3 mru 0 22 dR6A]@mI>Jhkl_TN7LWSn0
+32
+l24
+L17
+V2d2L_jj0Na_1PXla@CPfl2
+R7
+R48
+R49
+R50
+R11
+R12
+!s100 UeJ3c6W4zFKjJ]6NQibQG0
+!i10b 1
+Emultiplexer_16
+Z51 w1499711835
+R1
+R2
+R3
+R4
+Z52 8D:/A/e, sources/Architecture/hw/Final_project/Cache/multiplexer.vhd
+Z53 FD:/A/e, sources/Architecture/hw/Final_project/Cache/multiplexer.vhd
+l0
+L5
+VQ7JQ8m[ndKj1BGCChG;I12
+R7
+32
+Z54 !s108 1499756177.447000
+Z55 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/multiplexer.vhd|
+Z56 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/multiplexer.vhd|
+R11
+R12
+!s100 S1JUdFDT7c_]F8;jfa`g93
+!i10b 1
+Abehavioral
+R1
+R2
+R3
+DEx4 work 14 multiplexer_16 0 22 Q7JQ8m[ndKj1BGCChG;I12
+32
+l14
+L13
+VggBTK0GNz<hZKCF;@OCk20
+R7
+R54
+R55
+R56
+R11
+R12
+!s100 <5k2hFbo>gX>LNzMEg48G1
+!i10b 1
+Etag_valid_array
+Z57 w1499580742
+R1
+R2
+R3
+R4
+Z58 8D:/A/e, sources/Architecture/hw/Final_project/Cache/Tag_Valid_Array.vhd
+Z59 FD:/A/e, sources/Architecture/hw/Final_project/Cache/Tag_Valid_Array.vhd
+l0
+L11
+VLZ:7n@[T5Z2SG@NUReUhG1
+R7
+32
+Z60 !s108 1499756176.734000
+Z61 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:/A/e, sources/Architecture/hw/Final_project/Cache/Tag_Valid_Array.vhd|
+Z62 !s107 D:/A/e, sources/Architecture/hw/Final_project/Cache/Tag_Valid_Array.vhd|
+R11
+R12
+!s100 IOH=QLW:dNC?l<H244d9R0
+!i10b 1
+Abhv
+R1
+R2
+R3
+DEx4 work 15 tag_valid_array 0 22 LZ:7n@[T5Z2SG@NUReUhG1
+32
+l34
+L27
+V>3FRDXQf3]SLfX^3SL00d1
+R7
+R60
+R61
+R62
+R11
+R12
+!s100 BX6gbR>@UUa_3]0=V;4MS2
+!i10b 1

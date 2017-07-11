@@ -1,0 +1,66 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+--------------------------------------------------------
+
+entity Miss_Hit_Logic is
+
+port( tag:	in std_logic_vector(3 downto 0);
+	    w0:	in std_logic_vector(4 downto 0);  --write0 =  tag 0 + valid 0 
+	    w1:	in std_logic_vector(4 downto 0);  --write1 = tag 1  +  valid 1 
+	    hit:	out std_logic;
+	    w0_valid:	out std_logic;
+	    w1_valid:	out std_logic
+	
+	    );
+
+end Miss_Hit_Logic ;
+
+--------------------------------------------------------
+
+architecture description of Miss_Hit_Logic  is
+
+    signal  tag_equal_to_w0: STD_LOGIC_VECTOR(3 downto 0);
+    signal  tag_equal_to_w1: STD_LOGIC_VECTOR(3 downto 0);
+    signal  data_is_in_w0: STD_LOGIC;
+    signal  data_is_in_w1: STD_LOGIC;
+    
+    signal  valid : std_logic_vector(1 downto 0);
+
+
+  begin 
+    --see if the tags are equal (is tag of cpu address equal to tag of our sets ?
+    tag_equal_to_w0 <= w0(3 downto 0) xnor tag;
+    tag_equal_to_w1 <= w1(3 downto 0) xnor tag;
+    
+    data_is_in_w0 <= tag_equal_to_w0(0) and tag_equal_to_w0(1) and tag_equal_to_w0(2) and tag_equal_to_w0(3);
+    data_is_in_w1 <= tag_equal_to_w1(0) and tag_equal_to_w1(1) and tag_equal_to_w1(2) and tag_equal_to_w1(3);
+    
+    w0_valid <= data_is_in_w0 and w0(4);   --w0(0) is valid bit 
+    w1_valid <= data_is_in_w1 and w1(4);   --w1(1) is valid bit
+    
+    valid(0) <=data_is_in_w0 and w0(4);
+    valid(1) <=data_is_in_w1 and w1(4);
+    
+  
+      hit <=  valid(0) or valid(1);
+  
+  -- if (found in 0)
+       --hit <= '1' ; 
+    --  wo_valid <='1';
+	  -- w1_valid <='0';
+	  
+	   --elsif(found in 1)
+	        --hit <= '1' ; 
+	  --  wo_valid <='0';
+	  -- w1_valid <='1';
+
+--else
+  --  wo_valid <='0';
+	  -- w1_valid <='0';
+    
+    end description;
+
+--------------------------------------------------------
+
+
